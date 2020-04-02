@@ -8,7 +8,7 @@ package logica;
 public class Contacto {
     //Atributos
     private int id;
-    private byte foto;
+    private byte[] foto;
     private String nombre;
     private String apellido;
     private String company;
@@ -34,6 +34,7 @@ public class Contacto {
         
     }
     
+    
     //Contructor sin imagen y id
     public Contacto( int id, String nombre, String apellido, String company, String posicion, String email, String tel, String notas){
         
@@ -48,7 +49,7 @@ public class Contacto {
     }
     
     //Constructor completo
-    public Contacto( int id, byte foto, String nombre, String apellido, String company, String posicion, String email, String tel, String notas){
+    public Contacto( int id, byte[] foto, String nombre, String apellido, String company, String posicion, String email, String tel, String notas){
         
         this.id       = id;
         this.foto     = foto;
@@ -73,11 +74,11 @@ public class Contacto {
         this.id = id;
     }
 
-    public byte getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(byte foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 

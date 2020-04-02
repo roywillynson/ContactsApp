@@ -36,7 +36,7 @@ public class ContactosJDBC {
                 while (rs.next()) {
                     contactos.add(new Contacto(
                             rs.getInt(1),
-                            rs.getByte(2),
+                            rs.getBytes(2),
                             rs.getString(3),
                             rs.getString(4),
                             rs.getString(5),
@@ -50,6 +50,7 @@ public class ContactosJDBC {
             }
         }
         catch(SQLException e){
+            
             System.out.println(e);
             
         }
@@ -89,7 +90,7 @@ public class ContactosJDBC {
                 
                 pstmnt = conn.prepareStatement(query);
 
-                pstmnt.setByte  (1, contacto.getFoto()    );
+                pstmnt.setBytes  (1, contacto.getFoto()    );
                 pstmnt.setString(2, contacto.getNombre()  );
                 pstmnt.setString(3, contacto.getApellido());
                 pstmnt.setString(4, contacto.getCompany() );
@@ -179,7 +180,7 @@ public class ContactosJDBC {
 
                 pstmnt = conn.prepareStatement(query);
           
-                pstmnt.setByte  (1, contacto.getFoto()    );
+                pstmnt.setBytes(1, contacto.getFoto()    );
                 pstmnt.setString(2, contacto.getNombre()  );
                 pstmnt.setString(3, contacto.getApellido());
                 pstmnt.setString(4, contacto.getCompany() );

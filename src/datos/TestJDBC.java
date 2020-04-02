@@ -7,6 +7,7 @@ package datos;
 
 import java.util.List;
 import logica.Contacto;
+import logica.utilidades.CSV;
 
 /**
  *
@@ -17,7 +18,7 @@ public class TestJDBC {
     public static void main(String[] args) {
         
         ContactosJDBC tablaContacto = new ContactosJDBC();
-        
+        /*
         //Borrar registro
         //tablaContacto.delete(4);
         
@@ -37,6 +38,29 @@ public class TestJDBC {
         //Actualizar registro
         tablaContacto.update(3, pedro);
         
+        
+        */
+        
+        
+        CSV archivo = new CSV();
+        List<Contacto> contactosarc = archivo.CSVToContacto("C:\\Users\\Latitude 5580\\Desktop\\Hola.txt");
+        
+        for(Contacto contacto: contactosarc){
+            
+            System.out.println(
+                contacto.getNombre()   + "\t" +
+                contacto.getApellido() + "\t" +
+                contacto.getCompany()  + "\t" +
+                contacto.getEmail()    + "\t" +
+                contacto.getPosicion() + "\t" +
+                contacto.getTelefono()
+            );
+        }
+        
+        tablaContacto.add(contactosarc.get(1));
+        
+        
+        
         //Mostrar registro
         List<Contacto> contactos = tablaContacto.getAllContacs();
         
@@ -54,10 +78,6 @@ public class TestJDBC {
                 contacto.getTelefono()
             );
         }
-        
-        
-        
-        
         
     }
     
