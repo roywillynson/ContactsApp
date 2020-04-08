@@ -1,105 +1,120 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logica.utilidades;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.CSVPrinter;
+
+//Terceros
 import logica.Contacto;
 
-/**
- *
- * @author Latitude 5580
- */
-public class CSV<T>{
+
+public class CSV{
     
-    private BufferedReader lectura    = null;
-    private BufferedWriter escritura  = null;
-    private File file                 = null;
-    private final String separador    = ",";
-    
+    public static CSVFormat formato  = CSVFormat.DEFAULT.withQuote(null);
+    private BufferedReader lectura   = null;
+    private BufferedWriter escritura = null;
+ 
+ 
+    //Convertir Archivo CSV a Contacto
     public List<Contacto> CSVToContacto(String input) {
         //Lista de Contactos
-        List<Contacto> lista = new ArrayList<>();
-        
-        //Archivo
-        file = new File(input);
-
-        
-        if( !(file.exists()) ){
-            
-            System.out.println("Archivo de entrada no existe");
-
-        }
-        else
-        {
-            
-            try{
-                
-                lectura = new BufferedReader(new FileReader(file));
-
-                String l;
-                
-                while((l = lectura.readLine() ) != null){
-                       
-                    String[] registro = l.split(separador);
-                    
-                    Contacto contacto = new Contacto();
-                    
-                    if(registro.length == 8){
-                        
-                        for(int i = 0; i < registro.length; i++){
-                            contacto.setFoto    ( cleanString( registro[0]).getBytes() );
-                            contacto.setNombre  ( cleanString( registro[1]) );
-                            contacto.setApellido( cleanString( registro[2]) );
-                            contacto.setCompany ( cleanString( registro[3]) );
-                            contacto.setPosicion( cleanString( registro[4]) );
-                            contacto.setEmail   ( cleanString( registro[5]) );
-                            contacto.setTelefono( cleanString( registro[6]) );
-                            contacto.setNotas   ( cleanString( registro[7]) );
-                        }
+        List<Contacto> contactos = new ArrayList<>();
  
-                    }
-
-                    lista.add(contacto);
-                    
-                }
-
-            }
-            catch(IOException e){
+        try{
+            //Crear archivo a leer
+            File file = new File(input);
+            
+            //Archivo
+            lectura = new BufferedReader(new FileReader(file));
+            
+            //Convertir archivo
+            CSVParser fileParser = new CSVParser(lectura, formato);
+            
+            //Mostrar registro
+            for (CSVRecord registro : fileParser.getRecords()) {
                 
-                System.out.println(e);
+                List<String> linea = new ArrayList<>();
                 
-            }
-            finally
-            {
-                try{
-                    if(lectura != null) 
-                        lectura.close();
-                }
-                catch(IOException e){
-                    System.out.println(e);
+                //Verificacion innesesaria
+                for (String dato: registro) linea.add(dato);
+ 
+                //Tengan 7 datos
+                if(linea.size() == 8) {
+                    Contacto contacto = new Contacto();
+                    contacto.setFoto( cleanString( linea.get(0)).getBytes());
+                    contacto.setNombre  ( cleanString( linea.get(1) ) );
+                    contacto.setApellido( cleanString( linea.get(2) ) );
+                    contacto.setCompany ( cleanString( linea.get(3) ) );
+                    contacto.setPosicion( cleanString( linea.get(4) ) );
+                    contacto.setEmail   ( cleanString( linea.get(5) ) );
+                    contacto.setTelefono( cleanString( linea.get(6) ) );
+                    contacto.setNotas   ( cleanString( linea.get(7) ) );
+                    contactos.add(contacto);                 
                 }
   
             }
+            
+        }catch(IOException e){    
+            System.out.println(e);
+        }
+        finally{
+            try{
+                if(lectura != null) 
+                    lectura.close();
+                
+            }catch(IOException e){
+                System.out.println(e); 
+            } 
         }
         
-        return lista;
+        return contactos;
     }
     
-    public void ObjectToCSV(){
+    //Convertir Objecto a archivo CSV
+    public void ContactoToCSV(List<Contacto> lista, String output){
         
+        try{
+            //Creando archivo
+            File file = new File(output);
+            //Escritura del archivo
+            escritura = new BufferedWriter(new FileWriter(file));
+            
+            //Establecer formatos y nombre columnas
+            CSVPrinter escritor  = new CSVPrinter(escritura, formato
+                        .withHeader("Nombre", "Apellido", "Compa\u00F1ia", "Posicion","Email","Telefono", "Notas")
+            );
+            
+            //Imprimir registro en archivo
+            for(Contacto contacto : lista){
+                escritor.printRecord(contacto.getNombre(), contacto.getApellido(), contacto.getCompany(), contacto.getPosicion(), contacto.getEmail(), contacto.getTelefono(), contacto.getNotas());
+            }
+            
+            //Liberar Memoria
+            escritor.close(true);
+            
+        }catch(IOException e){
+            
+            System.out.println(e); 
+            
+        }
     }
     
+    //Limpiar String
     public String cleanString( String n ){
+        
         return n.replace("\"", "");
+        
     }
     
 }

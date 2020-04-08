@@ -9,13 +9,12 @@ public class ContactosJDBC {
     
     //Atributos
     private Connection conn = null;
-//    private Statement stmnt = null;
+//  private Statement stmnt = null;
     private PreparedStatement pstmnt  = null;
     private ResultSet rs    = null;
     
     //Metodos
-    
-    /************************ Read *************************/
+    /************************ Read **************************/
     public List<Contacto> getAllContacs(){
         
         ArrayList<Contacto> contactos = new ArrayList();
@@ -34,9 +33,10 @@ public class ContactosJDBC {
                 rs = pstmnt.executeQuery();
 
                 while (rs.next()) {
+                    Blob foto = rs.getBlob(2);
                     contactos.add(new Contacto(
                             rs.getInt(1),
-                            rs.getBytes(2),
+                            foto.getBytes(1, (int)foto.length()),
                             rs.getString(3),
                             rs.getString(4),
                             rs.getString(5),
@@ -44,7 +44,6 @@ public class ContactosJDBC {
                             rs.getString(7),
                             rs.getString(8),
                             rs.getString(9)
-                           
                     ));
                 }
             }
@@ -74,6 +73,63 @@ public class ContactosJDBC {
         
     }
     
+    /*********************** Buscar *************************/
+    public List<Contacto> buscar(String queryBuscar){
+        ArrayList<Contacto> contactos = new ArrayList();
+        
+        String query = "SELECT * FROM contactos " + queryBuscar;
+        
+        Conexion.conectar();
+        
+        try{
+            
+            conn = Conexion.getConexion();
+            
+            if (conn != null) {
+                
+                pstmnt = conn.prepareStatement(query);
+                
+                rs = pstmnt.executeQuery();
+                
+                while (rs.next()) {
+                    Blob foto = rs.getBlob(2);
+                    contactos.add(new Contacto(
+                            rs.getInt(1),
+                            foto.getBytes(1, (int)foto.length()),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8),
+                            rs.getString(9)
+                    ));
+                }
+            }
+        }
+        catch(SQLException e){
+            
+            System.out.println(e);
+            
+        }
+        finally{
+            
+            Conexion.desconectar();
+            Conexion.cerrar(rs);
+            Conexion.cerrar(pstmnt);
+//            try{
+//                
+//                System.out.println("Esta cerrada la instancia: " + Conexion.getConexion().isClosed());
+//                System.out.println("Esta cerrada la copia de la instancia: " + conn.isClosed());
+//            }
+//            catch(SQLException e){
+//                
+//            }
+        }
+        
+        return contactos;
+    }
+    
     
     /*********************** Create ************************/
     public void add(Contacto contacto){
@@ -90,7 +146,7 @@ public class ContactosJDBC {
                 
                 pstmnt = conn.prepareStatement(query);
 
-                pstmnt.setBytes  (1, contacto.getFoto()    );
+                pstmnt.setBytes(1,  contacto.getFoto()  );
                 pstmnt.setString(2, contacto.getNombre()  );
                 pstmnt.setString(3, contacto.getApellido());
                 pstmnt.setString(4, contacto.getCompany() );

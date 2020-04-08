@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/presentacion/Principal.java</file>
+            <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/logica/utilidades/renderer/TablaRender.java</file>
+            <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/logica/utilidades/IMGHandler.java</file>
             <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/datos/Conexion.java</file>
             <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/datos/ContactosJDBC.java</file>
             <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/datos/TestJDBC.java</file>
             <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/logica/utilidades/CSV.java</file>
             <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/logica/Contacto.java</file>
+            <file>file:/C:/Users/Latitude%205580/Documents/NetBeansProjects/CRUDContactos/src/logica/TablaContacto.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package logica;
 
 public class Contacto {
@@ -34,9 +30,21 @@ public class Contacto {
         
     }
     
-    
+    //Contructor sin id
+     public Contacto( byte[] foto, String nombre, String apellido, String company, String posicion, String email, String tel, String notas){
+        this.foto     = foto;
+        this.nombre   = nombre;
+        this.apellido = apellido;
+        this.company  = company;
+        this.posicion = posicion;
+        this.email    = email;
+        this.telefono = tel;
+        this.notas    = notas;
+        ++Contacto.no_contactos;
+    }
+     
     //Contructor sin imagen y id
-    public Contacto( int id, String nombre, String apellido, String company, String posicion, String email, String tel, String notas){
+    public Contacto(String nombre, String apellido, String company, String posicion, String email, String tel, String notas){
         
         this.nombre   = nombre;
         this.apellido = apellido;
@@ -77,6 +85,7 @@ public class Contacto {
     public byte[] getFoto() {
         return foto;
     }
+    
 
     public void setFoto(byte[] foto) {
         this.foto = foto;

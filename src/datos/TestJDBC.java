@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package datos;
+
 
 import java.util.List;
 import logica.Contacto;
 import logica.utilidades.CSV;
+import logica.utilidades.IMGHandler;
+import org.apache.commons.csv.CSVFormat;
 
 /**
  *
@@ -18,13 +17,12 @@ public class TestJDBC {
     public static void main(String[] args) {
         
         ContactosJDBC tablaContacto = new ContactosJDBC();
-        /*
+        
         //Borrar registro
         //tablaContacto.delete(4);
         
         //Agregar registro
         Contacto pedro = new Contacto();
-        
         pedro.setNombre("Peter");
         pedro.setApellido("Jason");
         pedro.setCompany("Brother company");
@@ -39,12 +37,14 @@ public class TestJDBC {
         tablaContacto.update(3, pedro);
         
         
-        */
+        
         
         
         CSV archivo = new CSV();
-        List<Contacto> contactosarc = archivo.CSVToContacto("C:\\Users\\Latitude 5580\\Desktop\\Hola.txt");
-        
+        CSV.formato = CSVFormat.EXCEL.withQuote(null).withDelimiter(';');
+        //archivo.ContactoToCSV(tablaContacto.getAllContacs(), "C:\\Users\\Latitude 5580\\Desktop\\Prueba.txt");
+     
+        /*
         for(Contacto contacto: contactosarc){
             
             System.out.println(
@@ -58,18 +58,17 @@ public class TestJDBC {
         }
         
         tablaContacto.add(contactosarc.get(1));
-        
+        */
         
         
         //Mostrar registro
-        List<Contacto> contactos = tablaContacto.getAllContacs();
+        List<Contacto> contactos = archivo.CSVToContacto("C:\\Users\\Latitude 5580\\Desktop\\Prueba.txt");
         
         
         for(Contacto contacto: contactos){
             
             System.out.println(
                     
-                contacto.getId()       + "\t" +
                 contacto.getNombre()   + "\t" +
                 contacto.getApellido() + "\t" +
                 contacto.getCompany()  + "\t" +

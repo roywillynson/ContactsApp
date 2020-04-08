@@ -8,7 +8,7 @@ public class Conexion {
     private static Connection conn = null;
     private static final String PORT = "3306";
     private static final String DB_NAME = "agenda";
-    private static final String JDBC_URL  = "jdbc:mysql://localhost:"+ Conexion.PORT +"/"+ Conexion.DB_NAME +"?useSSL=false";
+    private static final String JDBC_URL  = "jdbc:mysql://localhost:"+ Conexion.PORT +"/"+ Conexion.DB_NAME +"?allowPublicKeyRetrieval = true&useSSL=false";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASS = "admin";
     
