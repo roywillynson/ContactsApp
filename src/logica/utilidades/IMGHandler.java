@@ -16,7 +16,6 @@ public class IMGHandler{
     //Atributos
     private static InputStream is   = null;
     private static BufferedImage bi = null;
-    
     /******************************************************************
      *          Metodo:  Convertir Imagen a Array de Bytes
      ******************************************************************/
@@ -61,6 +60,7 @@ public class IMGHandler{
     
     public static Image convertByteArrayToImage(byte[] byarr){
         
+        
         Image image = null;
         
         try {
@@ -80,7 +80,7 @@ public class IMGHandler{
             }
         }
         
-        
+            
         return image;
     }
     

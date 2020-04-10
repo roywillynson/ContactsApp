@@ -44,23 +44,22 @@ public class CSV{
             //Mostrar registro
             for (CSVRecord registro : fileParser.getRecords()) {
                 
-                List<String> linea = new ArrayList<>();
-                
-                //Verificacion innesesaria
-                for (String dato: registro) linea.add(dato);
- 
-                //Tengan 7 datos
-                if(linea.size() == 8) {
+                //Verificando que CSV sea valido
+                if(registro.size() == 8) {
+                    
                     Contacto contacto = new Contacto();
-                    contacto.setFoto( cleanString( linea.get(0)).getBytes());
-                    contacto.setNombre  ( cleanString( linea.get(1) ) );
-                    contacto.setApellido( cleanString( linea.get(2) ) );
-                    contacto.setCompany ( cleanString( linea.get(3) ) );
-                    contacto.setPosicion( cleanString( linea.get(4) ) );
-                    contacto.setEmail   ( cleanString( linea.get(5) ) );
-                    contacto.setTelefono( cleanString( linea.get(6) ) );
-                    contacto.setNotas   ( cleanString( linea.get(7) ) );
-                    contactos.add(contacto);                 
+                    contacto.setFoto( cleanString( registro.get(0)).getBytes());
+                    contacto.setNombre  ( cleanString( registro.get(1) ) );
+                    contacto.setApellido( cleanString( registro.get(2) ) );
+                    contacto.setCompany ( cleanString( registro.get(3) ) );
+                    contacto.setPosicion( cleanString( registro.get(4) ) );
+                    contacto.setEmail   ( cleanString( registro.get(5) ) );
+                    contacto.setTelefono( cleanString( registro.get(6) ) );
+                    contacto.setNotas   ( cleanString( registro.get(7) ) );
+                    contactos.add(contacto);  
+                    
+                }else{
+                    System.out.println("CSV no es valido");
                 }
   
             }

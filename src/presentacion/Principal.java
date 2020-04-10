@@ -4,24 +4,18 @@ package presentacion;
 import datos.ContactosJDBC;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
-import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import logica.Contacto;
 import logica.TablaContacto;
-import logica.utilidades.CSV;
 import logica.utilidades.IMGHandler;
 import logica.utilidades.renderer.TablaRender;
 
@@ -46,13 +40,8 @@ public class Principal extends javax.swing.JFrame {
         
         //Centrar Frame
         this.setLocationRelativeTo(null);
- 
         
-        btnGuardar.setContentAreaFilled(true);
-        btnGuardar.setOpaque(true);
-        btnGuardar.setBackground(Color.BLUE);
-        
-        //Renderizarimagenes
+        //Renderizar imagenes
         tblContactos.setDefaultRenderer(Object.class, new TablaRender());
         
         //Modificar estilo de cabezera
@@ -60,19 +49,6 @@ public class Principal extends javax.swing.JFrame {
         tblContactos.getTableHeader().setFont(new Font("Futura Md BT", Font.BOLD, 14));
         
         actualizarTabla();
-        /*
-        CSV importar = new CSV();
-        List<Contacto> listadecontactos = importar.CSVToContacto("C:\\Users\\Latitude 5580\\Desktop\\Prueba1.csv");
-        
-        txtNombre.setText   (listadecontactos.get(2).getNombre());
-        txtApellido.setText (listadecontactos.get(2).getApellido());
-        txtCompany.setText  (listadecontactos.get(2).getCompany());
-        txtPosicion.setText (listadecontactos.get(2).getPosicion());
-        txtEmail.setText    (listadecontactos.get(2).getEmail());
-        txtTel.setText      (listadecontactos.get(2).getTelefono());
-        txtNotas.setText    (listadecontactos.get(2).getNotas());
-        */
-        
         
     }
 
@@ -100,14 +76,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtTel = new javax.swing.JTextField();
         btnCargarImagen = new javax.swing.JButton();
-        txtNotas = new javax.swing.JTextField();
         lsoos = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtNotas = new javax.swing.JTextArea();
         pnlLeft = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnImportar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblContactos = new javax.swing.JTable();
@@ -120,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1124, 575));
 
         pnlRight.setBackground(new java.awt.Color(238, 238, 238));
-        pnlRight.setPreferredSize(new java.awt.Dimension(350, 638));
+        pnlRight.setPreferredSize(new java.awt.Dimension(400, 638));
 
         lblFoto.setBackground(new java.awt.Color(255, 255, 255));
         lblFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -128,53 +106,59 @@ public class Principal extends javax.swing.JFrame {
         lblFoto.setAlignmentX(0.5F);
         lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
 
-        txtNombre.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
         txtNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel2.setBackground(new java.awt.Color(92, 107, 192));
-        jLabel2.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 153, 255));
         jLabel2.setText("Nombre:");
 
         jLabel3.setBackground(new java.awt.Color(92, 107, 192));
-        jLabel3.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 153, 255));
         jLabel3.setText("Apellido:");
 
-        txtApellido.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
+        txtApellido.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtApellido.setForeground(new java.awt.Color(102, 102, 102));
         txtApellido.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel4.setBackground(new java.awt.Color(92, 107, 192));
-        jLabel4.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 153, 255));
         jLabel4.setText("Compañia:");
 
-        txtCompany.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
-        txtCompany.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
+        txtCompany.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtCompany.setForeground(new java.awt.Color(102, 102, 102));
+        txtCompany.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel5.setBackground(new java.awt.Color(92, 107, 192));
-        jLabel5.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 153, 255));
         jLabel5.setText("Posicion:");
 
-        txtPosicion.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
-        txtPosicion.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
+        txtPosicion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtPosicion.setForeground(new java.awt.Color(102, 102, 102));
+        txtPosicion.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel6.setBackground(new java.awt.Color(92, 107, 192));
-        jLabel6.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 153, 255));
         jLabel6.setText("Email:");
 
-        txtEmail.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
-        txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
+        txtEmail.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(102, 102, 102));
+        txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel7.setBackground(new java.awt.Color(92, 107, 192));
-        jLabel7.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 153, 255));
         jLabel7.setText("Teléfono:");
 
-        txtTel.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
-        txtTel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
+        txtTel.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtTel.setForeground(new java.awt.Color(102, 102, 102));
+        txtTel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         btnCargarImagen.setBackground(new java.awt.Color(102, 102, 255));
         btnCargarImagen.setFont(new java.awt.Font("Futura Md BT", 0, 14)); // NOI18N
@@ -185,48 +169,49 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        txtNotas.setFont(new java.awt.Font("Futura Bk BT", 0, 14)); // NOI18N
-        txtNotas.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
-
         lsoos.setBackground(new java.awt.Color(92, 107, 192));
-        lsoos.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        lsoos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         lsoos.setForeground(new java.awt.Color(51, 153, 255));
-        lsoos.setText("Notas");
+        lsoos.setText("Notas:");
+
+        txtNotas.setColumns(20);
+        txtNotas.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtNotas.setRows(5);
+        txtNotas.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
+        jScrollPane2.setViewportView(txtNotas);
 
         javax.swing.GroupLayout pnlRightLayout = new javax.swing.GroupLayout(pnlRight);
         pnlRight.setLayout(pnlRightLayout);
         pnlRightLayout.setHorizontalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlRightLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRightLayout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(107, Short.MAX_VALUE)
+                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lsoos)
-                    .addComponent(txtNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNombre)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(txtApellido)
-                        .addComponent(txtCompany)
-                        .addComponent(txtPosicion)
-                        .addComponent(txtEmail)
-                        .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(71, 71, 71))
+                    .addComponent(txtNombre)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(txtApellido)
+                    .addComponent(txtCompany)
+                    .addComponent(txtPosicion)
+                    .addComponent(txtEmail)
+                    .addComponent(txtTel)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRightLayout.createSequentialGroup()
+                        .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCargarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)))
+                .addGap(94, 94, 94))
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(47, 47, 47)
                 .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCargarImagen)
@@ -256,14 +241,15 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lsoos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
 
         getContentPane().add(pnlRight, java.awt.BorderLayout.LINE_END);
 
         pnlLeft.setBackground(new java.awt.Color(238, 238, 238));
+        pnlLeft.setPreferredSize(new java.awt.Dimension(150, 763));
 
         btnGuardar.setBackground(new java.awt.Color(102, 102, 255));
         btnGuardar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
@@ -310,6 +296,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnImportar.setBackground(new java.awt.Color(204, 204, 255));
         btnImportar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        btnImportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/csv_azul.png"))); // NOI18N
         btnImportar.setText("Importar");
         btnImportar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         btnImportar.setBorderPainted(false);
@@ -317,6 +304,19 @@ public class Principal extends javax.swing.JFrame {
         btnImportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImportarActionPerformed(evt);
+            }
+        });
+
+        btnExportar.setBackground(new java.awt.Color(204, 204, 255));
+        btnExportar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/csv_azul.png"))); // NOI18N
+        btnExportar.setText("Exportar");
+        btnExportar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btnExportar.setBorderPainted(false);
+        btnExportar.setContentAreaFilled(false);
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
             }
         });
 
@@ -330,19 +330,19 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,26 +406,26 @@ public class Principal extends javax.swing.JFrame {
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                .addGap(0, 89, Short.MAX_VALUE)
+                .addGap(0, 140, Short.MAX_VALUE)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
+                .addGap(81, 81, 81)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -460,7 +460,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
-        // TODO add your handling code here:
+        CSVJFileChooser importar = new CSVJFileChooser(this);
+        actualizarTabla();
+
     }//GEN-LAST:event_btnImportarActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -473,7 +475,12 @@ public class Principal extends javax.swing.JFrame {
             actualizarTabla();
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExportarActionPerformed
     
+    //Mostra la tabla
     private void actualizarTabla(){
         limpiarTabla();
         tabla.addDatosFilas();
@@ -481,15 +488,16 @@ public class Principal extends javax.swing.JFrame {
         tblContactos.setModel(models);
     }   
     
+    //Limpiar Tabla
     private void limpiarTabla(){
-        models.setRowCount(0);
-        tblContactos.setModel(models);
+        models.setRowCount(0);         //Limpiar
+        tblContactos.setModel(models); //Mostrar los contactos
     }
     
     private void borrar(){
-        int fila = tblContactos.getSelectedRow();
-        jdbc.delete((int)tblContactos.getValueAt(fila, 0));
-        actualizarTabla();
+        int fila = tblContactos.getSelectedRow();           //Obtener la fila seleccionada
+        jdbc.delete((int)tblContactos.getValueAt(fila, 0)); //Obtener campo id y borrar
+        actualizarTabla(); //Refrescar tabla
     }
     
     private void guardar(){
@@ -608,6 +616,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCargarImagen;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnImportar;
     private javax.swing.JButton btnLimpiar;
@@ -621,6 +630,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lsoos;
     private javax.swing.JPanel pnlCenter;
@@ -632,7 +642,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtCompany;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNotas;
+    private javax.swing.JTextArea txtNotas;
     private javax.swing.JTextField txtPosicion;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables

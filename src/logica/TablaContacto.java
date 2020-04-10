@@ -10,8 +10,6 @@ import javax.swing.Icon;
 
 //Terceros
 import datos.ContactosJDBC;
-import java.awt.Color;
-import java.awt.Font;
 
 
 public class TablaContacto extends JTable {
@@ -74,9 +72,18 @@ public class TablaContacto extends JTable {
             Object[] regis = new Object[9]; //Registro
             //Datos
             regis[0] = lista.get(i).getId();
-            //Convertir la imagen
-            ImageIcon img = new ImageIcon(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()).getScaledInstance(32, 32, 0));
-            regis[1] = new JLabel((Icon)img); //Asignar
+           
+            JLabel labelimg = new JLabel();
+            
+            //Si no encuentra la imagen, pues el label no tendra imagen
+            if(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()) != null){
+                
+                labelimg.setIcon(new ImageIcon(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()).getScaledInstance(32, 32, 0)));
+                labelimg.setHorizontalAlignment(JLabel.CENTER);
+                labelimg.setVerticalAlignment(JLabel.CENTER);
+            }
+            
+            regis[1] = labelimg; //Asignar Imagen si existe
             regis[2] = lista.get(i).getNombre();
             regis[3] = lista.get(i).getApellido();
             regis[4] = lista.get(i).getCompany();
@@ -85,8 +92,7 @@ public class TablaContacto extends JTable {
             regis[7] = lista.get(i).getTelefono();
             regis[8] = lista.get(i).getNotas();
             
-            
-            
+
             setDato(regis, i, lista.size()); //Clonar lista
             
             model.addRow(regis); //Agregar filas
