@@ -45,8 +45,7 @@ public class Principal extends javax.swing.JFrame {
         tblContactos.setDefaultRenderer(Object.class, new TablaRender());
         
         //Modificar estilo de cabezera
-        tblContactos.getTableHeader().setBackground(Color.BLUE);
-        tblContactos.getTableHeader().setFont(new Font("Futura Md BT", Font.BOLD, 14));
+        tblContactos.getTableHeader().setFont(new Font("Segoe UI Semilight", Font.BOLD, 14));
         
         actualizarTabla();
         
@@ -95,7 +94,7 @@ public class Principal extends javax.swing.JFrame {
         cbFiltro = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1124, 575));
+        setMinimumSize(new java.awt.Dimension(1321, 773));
 
         pnlRight.setBackground(new java.awt.Color(238, 238, 238));
         pnlRight.setPreferredSize(new java.awt.Dimension(400, 638));
@@ -121,7 +120,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setText("Apellido:");
 
         txtApellido.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        txtApellido.setForeground(new java.awt.Color(102, 102, 102));
+        txtApellido.setForeground(new java.awt.Color(51, 51, 51));
         txtApellido.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel4.setBackground(new java.awt.Color(92, 107, 192));
@@ -130,7 +129,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setText("Compañia:");
 
         txtCompany.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        txtCompany.setForeground(new java.awt.Color(102, 102, 102));
+        txtCompany.setForeground(new java.awt.Color(51, 51, 51));
         txtCompany.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel5.setBackground(new java.awt.Color(92, 107, 192));
@@ -139,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setText("Posicion:");
 
         txtPosicion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        txtPosicion.setForeground(new java.awt.Color(102, 102, 102));
+        txtPosicion.setForeground(new java.awt.Color(51, 51, 51));
         txtPosicion.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel6.setBackground(new java.awt.Color(92, 107, 192));
@@ -148,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel6.setText("Email:");
 
         txtEmail.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(102, 102, 102));
+        txtEmail.setForeground(new java.awt.Color(51, 51, 51));
         txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         jLabel7.setBackground(new java.awt.Color(92, 107, 192));
@@ -157,7 +156,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel7.setText("Teléfono:");
 
         txtTel.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        txtTel.setForeground(new java.awt.Color(102, 102, 102));
+        txtTel.setForeground(new java.awt.Color(51, 51, 51));
         txtTel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
 
         btnCargarImagen.setBackground(new java.awt.Color(102, 102, 255));
@@ -176,6 +175,7 @@ public class Principal extends javax.swing.JFrame {
 
         txtNotas.setColumns(20);
         txtNotas.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        txtNotas.setForeground(new java.awt.Color(51, 51, 51));
         txtNotas.setRows(5);
         txtNotas.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
         jScrollPane2.setViewportView(txtNotas);
@@ -241,7 +241,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lsoos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -342,7 +342,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,15 +350,14 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(31, 31, 31))
         );
 
         getContentPane().add(pnlLeft, java.awt.BorderLayout.LINE_START);
 
         pnlCenter.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblContactos.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        tblContactos.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
+        tblContactos.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         tblContactos.setForeground(new java.awt.Color(102, 102, 102));
         tblContactos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -384,7 +383,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblContactos);
 
-        jLabel8.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel8.setText("Buscar:");
 
         txtBuscar.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
@@ -394,7 +393,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel9.setText("Filtro:");
 
         cbFiltro.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
@@ -404,29 +403,29 @@ public class Principal extends javax.swing.JFrame {
         pnlCenter.setLayout(pnlCenterLayout);
         pnlCenterLayout.setHorizontalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                .addGap(0, 140, Short.MAX_VALUE)
+                .addGap(0, 95, Short.MAX_VALUE)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
