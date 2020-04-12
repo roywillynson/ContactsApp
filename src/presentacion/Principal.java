@@ -44,7 +44,7 @@ public class Principal extends javax.swing.JFrame {
        //Actualizar tabala
         actualizarTabla();
         
-        //Metodo MouseClicked tiene pequeño retraso por eso use el valueChange de ListSelection
+        //Metodo MouseClicked tiene pequeño retraso por eso use el valueChange de Oyente ListSelection
         tblContactos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
