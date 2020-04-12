@@ -138,6 +138,7 @@ public class ContactosJDBC {
         
         Conexion.conectar();
         
+        
         try{
             
             conn = Conexion.getConexion();

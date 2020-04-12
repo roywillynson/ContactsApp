@@ -1,8 +1,5 @@
 package presentacion;
 
-
-import datos.ContactosJDBC;
-import java.awt.Color;
 import java.awt.Font;
 
 import java.util.logging.Level;
@@ -14,9 +11,13 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
+import datos.ContactosJDBC;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import logica.Contacto;
 import logica.TablaContacto;
 import logica.utilidades.IMGHandler;
+import logica.utilidades.renderer.TablaHeaderRender;
 import logica.utilidades.renderer.TablaRender;
 
 
@@ -28,14 +29,6 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         
-        try {
-            
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         initComponents();
         
         //Centrar Frame
@@ -44,10 +37,21 @@ public class Principal extends javax.swing.JFrame {
         //Renderizar imagenes
         tblContactos.setDefaultRenderer(Object.class, new TablaRender());
         
-        //Modificar estilo de cabezera
-        tblContactos.getTableHeader().setFont(new Font("Segoe UI Semilight", Font.BOLD, 14));
+        //Renderizar encabezado
+        tblContactos.getTableHeader().setDefaultRenderer(new TablaHeaderRender());
         
+        tblContactos.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+       //Actualizar tabala
         actualizarTabla();
+        
+        //Metodo MouseClicked tiene pequeño retraso por eso use el valueChange de ListSelection
+        tblContactos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                rellenarTextField();
+            }
+        });
         
     }
 
@@ -111,12 +115,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(92, 107, 192));
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel2.setForeground(new java.awt.Color(92, 107, 192));
         jLabel2.setText("Nombre:");
 
         jLabel3.setBackground(new java.awt.Color(92, 107, 192));
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel3.setForeground(new java.awt.Color(92, 107, 192));
         jLabel3.setText("Apellido:");
 
         txtApellido.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
@@ -125,7 +129,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel4.setBackground(new java.awt.Color(92, 107, 192));
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel4.setForeground(new java.awt.Color(92, 107, 192));
         jLabel4.setText("Compañia:");
 
         txtCompany.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
@@ -134,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(92, 107, 192));
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel5.setForeground(new java.awt.Color(92, 107, 192));
         jLabel5.setText("Posicion:");
 
         txtPosicion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
@@ -143,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(92, 107, 192));
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel6.setForeground(new java.awt.Color(92, 107, 192));
         jLabel6.setText("Email:");
 
         txtEmail.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
@@ -152,12 +156,17 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel7.setBackground(new java.awt.Color(92, 107, 192));
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel7.setForeground(new java.awt.Color(92, 107, 192));
         jLabel7.setText("Teléfono:");
 
         txtTel.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         txtTel.setForeground(new java.awt.Color(51, 51, 51));
         txtTel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 153, 255), new java.awt.Color(204, 204, 204)));
+        txtTel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelKeyTyped(evt);
+            }
+        });
 
         btnCargarImagen.setBackground(new java.awt.Color(102, 102, 255));
         btnCargarImagen.setFont(new java.awt.Font("Futura Md BT", 0, 14)); // NOI18N
@@ -170,7 +179,7 @@ public class Principal extends javax.swing.JFrame {
 
         lsoos.setBackground(new java.awt.Color(92, 107, 192));
         lsoos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        lsoos.setForeground(new java.awt.Color(51, 153, 255));
+        lsoos.setForeground(new java.awt.Color(92, 107, 192));
         lsoos.setText("Notas:");
 
         txtNotas.setColumns(20);
@@ -186,36 +195,33 @@ public class Principal extends javax.swing.JFrame {
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRightLayout.createSequentialGroup()
                 .addContainerGap(107, Short.MAX_VALUE)
-                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lsoos)
-                    .addComponent(txtNombre)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(txtApellido)
-                    .addComponent(txtCompany)
-                    .addComponent(txtPosicion)
-                    .addComponent(txtEmail)
-                    .addComponent(txtTel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRightLayout.createSequentialGroup()
-                        .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCargarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)))
+                .addGroup(pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(btnCargarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lsoos, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCompany, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPosicion, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
                 .addGap(94, 94, 94))
         );
         pnlRightLayout.setVerticalGroup(
             pnlRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRightLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(41, 41, 41)
                 .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCargarImagen)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,8 +248,8 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lsoos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getContentPane().add(pnlRight, java.awt.BorderLayout.LINE_END);
@@ -253,6 +259,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnGuardar.setBackground(new java.awt.Color(102, 102, 255));
         btnGuardar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/new.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnGuardar.setBorderPainted(false);
@@ -264,6 +271,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnBorrar.setBackground(new java.awt.Color(255, 102, 102));
         btnBorrar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
         btnBorrar.setText("Borrar");
         btnBorrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +282,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 102));
         btnEditar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -284,6 +293,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setFont(new java.awt.Font("Futura Md BT", 1, 14)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/sweeping.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnLimpiar.setBorderPainted(false);
@@ -299,7 +309,6 @@ public class Principal extends javax.swing.JFrame {
         btnImportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/csv_azul.png"))); // NOI18N
         btnImportar.setText("Importar");
         btnImportar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        btnImportar.setBorderPainted(false);
         btnImportar.setContentAreaFilled(false);
         btnImportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +321,6 @@ public class Principal extends javax.swing.JFrame {
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/csv_azul.png"))); // NOI18N
         btnExportar.setText("Exportar");
         btnExportar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        btnExportar.setBorderPainted(false);
         btnExportar.setContentAreaFilled(false);
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,22 +335,22 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(pnlLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(btnExportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImportar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -373,18 +381,15 @@ public class Principal extends javax.swing.JFrame {
         tblContactos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblContactos.setFillsViewportHeight(true);
         tblContactos.setGridColor(new java.awt.Color(153, 204, 255));
+        tblContactos.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblContactos.setRowHeight(50);
-        tblContactos.setRowMargin(4);
+        tblContactos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblContactos.setShowHorizontalLines(false);
         tblContactos.setShowVerticalLines(false);
-        tblContactos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblContactosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblContactos);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel8.setText("Buscar:");
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/search.png"))); // NOI18N
 
         txtBuscar.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -394,9 +399,10 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(92, 107, 192));
         jLabel9.setText("Filtro:");
 
-        cbFiltro.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
+        cbFiltro.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         cbFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "Apellido", "Nombre Completo", "Compañia" }));
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -407,18 +413,18 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCenterLayout.createSequentialGroup()
-                .addGap(0, 95, Short.MAX_VALUE)
+                .addGap(0, 89, Short.MAX_VALUE)
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,11 +443,6 @@ public class Principal extends javax.swing.JFrame {
         guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void tblContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContactosMouseClicked
-        rellenarTextField();
-        
-    }//GEN-LAST:event_tblContactosMouseClicked
-
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         borrar();
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -459,11 +460,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
-        CSVJFileChooser importar = new CSVJFileChooser(this);
+        CSVJFileChooser importar = new CSVJFileChooser(this, true);
         actualizarTabla();
 
     }//GEN-LAST:event_btnImportarActionPerformed
 
+    
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         if(!(txtBuscar.getText().isEmpty())){
             limpiarTabla();
@@ -476,8 +478,20 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-        // TODO add your handling code here:
+        CSVJFileChooser exportar = new CSVJFileChooser(this, false);
     }//GEN-LAST:event_btnExportarActionPerformed
+
+    private void txtTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelKeyTyped
+        if( !(Character.isDigit(evt.getKeyChar())) && (evt.getKeyChar()) != '-' && (evt.getKeyChar()) != ' ' && evt.getKeyChar() !='(' && evt.getKeyChar() !=')')
+        {
+            evt.consume();
+        }
+        else if(txtTel.getText().length() >= 15){
+            
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txtTelKeyTyped
     
     //Mostra la tabla
     private void actualizarTabla(){
@@ -493,12 +507,14 @@ public class Principal extends javax.swing.JFrame {
         tblContactos.setModel(models); //Mostrar los contactos
     }
     
+    //Borra registro
     private void borrar(){
         int fila = tblContactos.getSelectedRow();           //Obtener la fila seleccionada
         jdbc.delete((int)tblContactos.getValueAt(fila, 0)); //Obtener campo id y borrar
         actualizarTabla(); //Refrescar tabla
     }
     
+    //Guarda un nuevo Registro
     private void guardar(){
         
         if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()){
@@ -526,6 +542,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+    //Editar registro
     private void editar(){
         
     
@@ -554,20 +571,28 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+    //Rellenar TextField
     public void rellenarTextField(){
-        //Obtener fila seleccionada
-        int fila = tblContactos.getSelectedRow();
         
-        //Agregar campos al textfield
-        txtNombre.setText   (tblContactos.getValueAt(fila, 2).toString());
-        txtApellido.setText (tblContactos.getValueAt(fila, 3).toString());
-        txtCompany.setText  (tblContactos.getValueAt(fila, 4).toString());
-        txtPosicion.setText (tblContactos.getValueAt(fila, 5).toString());
-        txtEmail.setText    (tblContactos.getValueAt(fila, 6).toString());
-        txtTel.setText      (tblContactos.getValueAt(fila, 7).toString());
-        txtNotas.setText    (tblContactos.getValueAt(fila, 8).toString());
+            //Obtener fila seleccionada
+            int fila = tblContactos.getSelectedRow();
+
+            if(fila >= 0){
+                
+                //Agregar campos al textfield
+                txtNombre.setText   (tblContactos.getValueAt(fila, 2).toString());
+                txtApellido.setText (tblContactos.getValueAt(fila, 3).toString());
+                txtCompany.setText  (tblContactos.getValueAt(fila, 4).toString());
+                txtPosicion.setText (tblContactos.getValueAt(fila, 5).toString());
+                txtEmail.setText    (tblContactos.getValueAt(fila, 6).toString());
+                txtTel.setText      (tblContactos.getValueAt(fila, 7).toString());
+                txtNotas.setText    (tblContactos.getValueAt(fila, 8).toString());
+                
+            }
+
     }
     
+    //Limpiar el TextField
     public void limpiar(){
         txtNombre.setText(null);
         txtApellido.setText(null);
@@ -582,28 +607,14 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        //Cambiar look and feel
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {

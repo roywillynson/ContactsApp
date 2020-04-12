@@ -36,7 +36,7 @@ public class TablaContacto extends JTable {
         return columnas.length;
     }
     
-    public int getContidadFilas(){
+    public int getCantidadFilas(){
         return (datos.length > 0) ? datos.length : 0;
     }
     
@@ -78,7 +78,7 @@ public class TablaContacto extends JTable {
             //Si no encuentra la imagen, pues el label no tendra imagen
             if(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()) != null){
                 
-                labelimg.setIcon(new ImageIcon(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()).getScaledInstance(32, 32, 0)));
+                labelimg.setIcon(new ImageIcon(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()).getScaledInstance(35, 35, 4)));
                 labelimg.setHorizontalAlignment(JLabel.CENTER);
                 labelimg.setVerticalAlignment(JLabel.CENTER);
             }
@@ -121,8 +121,17 @@ public class TablaContacto extends JTable {
             //Datos
             regis[0] = lista.get(i).getId();
             //Convertir la imagen
-            ImageIcon img = new ImageIcon(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()).getScaledInstance(32, 32, 0));
-            regis[1] = new JLabel((Icon)img); //Asignar
+            JLabel labelimg = new JLabel();
+            
+            //Si no encuentra la imagen, pues el label no tendra imagen
+            if(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()) != null){
+                
+                labelimg.setIcon(new ImageIcon(logica.utilidades.IMGHandler.convertByteArrayToImage(lista.get(i).getFoto()).getScaledInstance(32, 32, 0)));
+                labelimg.setHorizontalAlignment(JLabel.CENTER);
+                labelimg.setVerticalAlignment(JLabel.CENTER);
+            }
+            
+            regis[1] = labelimg; //Asignar
             regis[2] = lista.get(i).getNombre();
             regis[3] = lista.get(i).getApellido();
             regis[4] = lista.get(i).getCompany();

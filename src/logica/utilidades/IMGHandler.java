@@ -92,7 +92,13 @@ public class IMGHandler{
         try {
             bi = ImageIO.read(file);
             
-            ImageIcon imgicon = new ImageIcon(bi.getScaledInstance(c.getWidth(), c.getHeight(), Image.SCALE_SMOOTH));
+            ImageIcon imgicon;
+            if(bi.getHeight() > c.getHeight() && bi.getWidth() > c.getWidth()){
+                imgicon = new ImageIcon(bi.getScaledInstance(c.getWidth(), c.getHeight(), Image.SCALE_SMOOTH));
+            }else{
+                imgicon = new ImageIcon(bi.getScaledInstance(bi.getWidth(), bi.getHeight(), Image.SCALE_SMOOTH));
+            }
+            
             
             c.setIcon(imgicon);
             

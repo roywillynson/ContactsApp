@@ -90,13 +90,11 @@ public class CSV{
             escritura = new BufferedWriter(new FileWriter(file));
             
             //Establecer formatos y nombre columnas
-            CSVPrinter escritor  = new CSVPrinter(escritura, formato
-                        .withHeader("Nombre", "Apellido", "Compa\u00F1ia", "Posicion","Email","Telefono", "Notas")
-            );
+            CSVPrinter escritor  = new CSVPrinter(escritura, formato);
             
             //Imprimir registro en archivo
             for(Contacto contacto : lista){
-                escritor.printRecord(contacto.getNombre(), contacto.getApellido(), contacto.getCompany(), contacto.getPosicion(), contacto.getEmail(), contacto.getTelefono(), contacto.getNotas());
+                escritor.printRecord(contacto.getId(),contacto.getNombre(), contacto.getApellido(), contacto.getCompany(), contacto.getPosicion(), contacto.getEmail(), contacto.getTelefono(), contacto.getNotas());
             }
             
             //Liberar Memoria
